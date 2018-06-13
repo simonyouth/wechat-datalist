@@ -7,23 +7,74 @@ Page({
    * 页面的初始数据
    */
   data: {
-    hidden: true
+    // news from API
+    newsList: [],
+    //request failed
+    getedData: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let _self = this;
+    function success(res) {
+      let data = net.parseData(res);
+      _self.setData({
+        newsList: data
+      })
+      console.log(_self.data.newsList)
+    }
+    function failed(err) {
+      _self.setData({
+        getedData: false
+      })
+    }
+    net.toRequest(url).then(success, failed)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+ deleteItem: function (event) {
+   let _id = event.currentTarget.id;
+   this.showModal();
+ } ,
+
+  showModal: function ( _id ){
+    let _self = this;
+    wx.showModal({
+      title: 'Delete',
+      content: 'Do you confirm to delete this news ?',
+      showCancel: true,
+      cancelText: 'No',
+      cancelColor: '#af9999',
+      confirmText: 'Yes',
+      confirmColor: '#af9999',
+      success: function(res) {
+        if(res.confirm){
+          //delete the specified item
+          _self.data.newsList.splice(_id, 1);
+          _self.setData({
+            newsList: _self.data.newsList
+          })
+        }
+      },
+      fail: function(res) {},
+      complete: function(res) {},
+    })
   },
 
+  goDetails: function (event) {
+    let _id = event.currentTarget.id;
+    let url = this.data.newsList[_id].story_url
+         ? this.data.newsList[_id].story_url 
+         : this.data.newsList[_id].url;
+    console.log(url)
+   wx.navigateTo({
+     url: '../webview/webview?url='+url,
+     success: function(res) {},
+     fail: function(res) {},
+     complete: function(res) {},
+   })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -67,13 +118,6 @@ Page({
   },
 
   test: function () {
-     function success(res) {
-     let data = net.parseData(res);
-  console.log(data)
-  }
-  function failed(err) {
-    console.log(err)
-  }
-  net.toRequest(url).then(success,failed)
+    
   }
 })

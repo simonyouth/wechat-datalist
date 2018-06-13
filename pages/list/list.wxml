@@ -1,14 +1,18 @@
-<view bindtap='test' class='container'>
-    <view class='data-item'>
-       <view class='title'>
-        <text >Title of Story</text>
+<view wx:if='{{getedData}}'>
+  <view  wx:for='{{newsList}}' wx:key='{{index}}' class='container' >
+      <view class='data-item' bindtap='goDetails' id='{{index}}'>
+          <view class='title'>
+            <text >{{item.story_title ? item.story_title : item.title}}</text>
+          </view>
+          <view class='author-date'>
+            <text class='author'>{{item.authors}}</text>
+            <text class='date'>{{item.create_at}}</text>
+          </view> 
       </view>
-      <view class='author-date'>
-        <text class='author'>Author</text>
-        <text class='date'>3 days ago</text>
+      <view class='deleteview'> 
+      <image src='../../images/delete.png' class='delete' id='{{index}}' bindtap='deleteItem'></image>
       </view> 
-    </view>
-    <view class='deleteview'> 
-     <image src='../../images/delete.png' class='delete'></image>
-    </view> 
-</view>
+  </view>
+ </view>
+ <view wx:else>Please check your net</view>  
+ 
