@@ -20,6 +20,13 @@ Page({
     let _self = this;
     function success(res) {
       let data = net.parseData(res);
+      //remove the items which both 'title' and 'story_title' are null
+      data.map((value,index) => {
+        if( !value.title && !value.story_title){
+          data.splice(index,1)
+        }
+      })
+      
       _self.setData({
         newsList: data
       })
@@ -70,17 +77,9 @@ Page({
     console.log(url)
    wx.navigateTo({
      url: '../webview/webview?url='+url,
-     success: function(res) {},
-     fail: function(res) {},
-     complete: function(res) {},
    })
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
   
-  },
 
   /**
    * 生命周期函数--监听页面隐藏
