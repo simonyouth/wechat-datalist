@@ -1,3 +1,14 @@
-<view bindtap='test'>
-    test
+<view bindtap='test' class='container'>
+    <view class='data-item'>
+       <view class='title'>
+        <text >Title of Story</text>
+      </view>
+      <view class='author-date'>
+        <text class='author'>Author</text>
+        <text class='date'>3 days ago</text>
+      </view> 
+    </view>
+    <view class='deleteview'> 
+     <image src='../../images/delete.png' class='delete'></image>
+    </view> 
 </view>
