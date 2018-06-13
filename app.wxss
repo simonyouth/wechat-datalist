@@ -1,13 +1,14 @@
 /**app.wxss**/
 .container {
   height: 100%;
-  width: 100%;
+  width: 95%;
   display: flex;
   flex-direction: row;
    align-items: center; 
   justify-content: space-between; 
-  padding: 10rpx 10px;  
-  /* margin: 10px 10px;  */
+  padding: 15rpx 10px;  
+  background-color: whitesmoke;
   box-sizing: border-box;
- 
+   margin: 10px 10px; 
+  border-radius: 7px 7px 7px 7px; 
 } 
