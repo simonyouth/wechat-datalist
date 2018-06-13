@@ -10,13 +10,17 @@ Page({
     // news from API
     newsList: [],
     //request failed
-    getedData: true
+    getedData: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: 'loading...',
+      mask: true,
+    })
     let _self = this;
     function success(res) {
       let data = net.parseData(res);
@@ -30,7 +34,7 @@ Page({
       _self.setData({
         newsList: data
       })
-      console.log(_self.data.newsList)
+      wx.hideLoading();
     }
     function failed(err) {
       _self.setData({
@@ -38,6 +42,9 @@ Page({
       })
     }
     net.toRequest(url).then(success, failed)
+
+    let current_time = new Date();
+    // console.log(current_time.getFullYear())
   },
 
  deleteItem: function (event) {
