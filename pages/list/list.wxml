@@ -6,13 +6,19 @@
           </view>
           <view class='author-date'>
             <text class='author'>{{item.authors}}</text>
-            <text class='date'>21 days ago</text>
+            <text class='date'>{{item.create_at.day 
+                  ? item.create_at.day + (item.create_at.day == 1 ? ' day':' days')
+                  : item.create_at.hour 
+                  ? item.create_at.hour + (item.create_at.hour == 1 ? ' hour':' hours')
+                  : item.create_at.minute
+                  ? item.create_at.minute + (item.create_at.minute == 1 ? ' minute':' minutes')
+                  : item.create_at.second + 's'
+              }} ago</text>
           </view>
-            <image src='../../images/delete.png' class='delete' id='{{index}}' bindtap='deleteItem'></image> 
+          
       </view>
-      <!-- <view class='deleteview'> 
-     <image src='../../images/delete.png' class='delete' id='{{index}}' bindtap='deleteItem'></image> 
-      </view>  -->
+        <image src='../../images/delete.png' class='delete' id='{{index}}' bindtap='deleteItem'></image> 
+     
   </view>
  </view>
  <view wx:else>Please check your net</view>  

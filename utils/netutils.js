@@ -1,4 +1,4 @@
-
+import util from './util.js';
 /**
  * promise, network request
  */
@@ -36,12 +36,13 @@ function parseData (res) {
         obj.story_title = value.story_title;
         obj.story_url = value.story_url;
         obj.url = value.url;
-        obj.create_at = value.created_at;
+        obj.create_at = util.transTime(value.created_at);
         neatData[index] = obj;
+       
         //because of Closure,will cover the previous time result
         // neatData[index].create_at = value.created_at;
       })
-  
+     
   return neatData;
 }
 module.exports = {
