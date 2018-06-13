@@ -1,0 +1,3 @@
+<view bindtap='test'>
+    test
+</view>

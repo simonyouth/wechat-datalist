@@ -1,11 +1,13 @@
 // pages/list/list.js
+const url = 'https://hn.algolia.com/api/v1/search_by_date?query=javascript';
+import net from '../../utils/netutils.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    hidden: true
   },
 
   /**
@@ -62,5 +64,16 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  test: function () {
+     function success(res) {
+     let data = net.parseData(res);
+  console.log(data)
+  }
+  function failed(err) {
+    console.log(err)
+  }
+  net.toRequest(url).then(success,failed)
   }
 })
