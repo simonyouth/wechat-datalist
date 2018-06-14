@@ -40,6 +40,8 @@ Page({
       _self.setData({
         getedData: false
       })
+      wx.hideLoading();
+      
     }
     net.toRequest(url).then(success, failed)
 
@@ -71,8 +73,6 @@ Page({
           })
         }
       },
-      fail: function(res) {},
-      complete: function(res) {},
     })
   },
 
